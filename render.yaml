@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: velox-ig-dashboard-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB
+        value: ig_bot
+      - key: DASHBOARD_PASSWORD
+        value: admin0987
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
