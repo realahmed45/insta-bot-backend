@@ -12,7 +12,13 @@ const MONGODB_DB = process.env.MONGODB_DB || "ig_bot";
 const DASHBOARD_PW = process.env.DASHBOARD_PASSWORD || "admin0987";
 const JWT_SECRET = process.env.JWT_SECRET || "velox-ig-dashboard-2026-secret";
 
-app.use(cors({ origin: "*" }));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  if (req.method === 'OPTIONS') return res.sendStatus(204);
+  next();
+});
 app.use(express.json());
 
 // ─── DB ───────────────────────────────────────────────────────────────────────
